@@ -1,0 +1,91 @@
+﻿@page "/fetchdata"
+
+<PageTitle>Weather forecast</PageTitle>
+
+@using Microsoft.TeamFoundation.WorkItemTracking.WebApi.Models;
+@using Microsoft.VisualStudio.Services.ReleaseManagement.WebApi;
+@using Microsoft.VisualStudio.Services.WebApi;
+@using ReleaseBoard.Data;
+@using System.Linq;
+@inject ReleaseDataService ReleaseDataService
+
+<h1>Nurse Online Portal Releases</h1>
+
+<p>The Release in Last 30 days</p>
+
+@if (releaseList == null || releaseList.Count == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <div class="panel panel-default border">
+        <div class="panel-heading alert-primary">
+            <h3 class="panel-title">NFR Releases</h3>
+            <div class="row">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-1">Id</div>
+                <div class="col-sm-3 font-weight-bold">
+                    <label>Name</label>
+                </div>
+                <div class="col-sm-4">
+                    <label>URL</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <div class="container-fluid">
+
+                @foreach (var release in releaseList)
+                {
+                    var releaseId = release.Release.Id;
+                    <div class="row">
+                        <div class="col-1"><button class="btn btn-primary" @onclick="@(e=> ShowReleaseWorkItems(e,releaseId))">@(release.IsCollapsed ? "+" : "-")</button></div>
+                        <div class="col-2">@release.Release.Id</div>
+                        <div class="col-5">@release.Release.Name</div>
+                        <div class="col-4"><a href="@(((ReferenceLink)release.Release.Links.Links["web"]).Href)" target="_blank">Details on Portal</a></div>
+                        
+                    </div>
+                     @if (release.WorkItems != null && !release.IsCollapsed)
+                            @foreach (var wi in release.WorkItems)
+                            {
+                                <div class="row">
+                                    <div class="col-1">@wi.Id</div>
+                                    <div class="col-5">@wi.Fields["System.Title"]</div>
+                                    <div class="col-4">@(((IdentityRef)(wi.Fields["System.AssignedTo"])).DisplayName)</div>
+                                    <div class="col-2">@wi.Fields["System.BoardColumn"]</div>
+                                </div>
+                            }
+                    }
+            </div>
+        </div>
+    </div>   
+}
+
+@code {
+    private List<ReleaseItem> releaseList = new List<ReleaseItem>();     
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await ReleaseDataService.GetReleasesAsync(30);
+
+        releaseList = result.Select(r => new ReleaseItem { Release = r, IsCollapsed = true, WorkItems = new List<WorkItem>() }).ToList();
+    }
+
+    protected async Task ShowReleaseWorkItems(MouseEventArgs e, int id)
+    {
+        var ri = releaseList.FirstOrDefault(r => r.Release.Id == id);
+        if (ri != null && ri.WorkItems.Count() == 0)
+        {
+            List<WorkItem> workItemList = new List<WorkItem>();
+            await foreach (var wiList in ReleaseDataService.GetReleaseWorkItemsAsync(id))
+            {
+                workItemList.AddRange(wiList);
+            }
+            ri.WorkItems = workItemList;
+            this.StateHasChanged();
+        }
+        ri.IsCollapsed = !ri.IsCollapsed;
+    }
+}
