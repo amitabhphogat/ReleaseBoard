@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oMa68GW3JIi7056zAvf5D59BIYF/Ig2YE9K3avKVsdOOlW4yoZCZTZzfz8Kq24Mah9lyyp9xaEUjyuHVnFTZ+g==",
+  "dgSpecHash": "IhGQdTaXX6vWLGqVaVbCW9MH9Aoi6eHNsVEgso5oNsCaU6Q+WCxPJ6MyGIWvkfqw5Cm4jMxVyB7CLCJ8A2N2bw==",
   "success": true,
-  "projectFilePath": "C:\\Workspace\\rnd\\BB.ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
+  "projectFilePath": "C:\\Workspace\\rnd\\ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\52367624\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\52367624\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",

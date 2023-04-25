@@ -41,7 +41,7 @@ namespace ReleaseBoard.Data
             var endDate = DateTime.Today.ToUniversalTime();
             var startDate = endDate.AddDays(-1 * lastDays);
             var releaseClient = Connection.GetClient<ReleaseHttpClient>();
-            return await releaseClient.GetReleasesAsync(project: _devOps.ProjectName, minCreatedTime: startDate, maxCreatedTime: endDate, definitionId: _devOps.DefinitionId) ?? new List<Release>();
+            return await releaseClient.GetReleasesAsync(project: _devOps.ProjectName, minCreatedTime: startDate, definitionId: _devOps.DefinitionId) ?? new List<Release>();
         }
 
         public async IAsyncEnumerable<List<WorkItem>> GetReleaseWorkItemsAsync(int releaseId)

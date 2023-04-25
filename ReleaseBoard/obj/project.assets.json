@@ -7871,11 +7871,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Workspace\\rnd\\BB.ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
+      "projectUniqueName": "C:\\Workspace\\rnd\\ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
       "projectName": "ReleaseBoard",
-      "projectPath": "C:\\Workspace\\rnd\\BB.ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
+      "projectPath": "C:\\Workspace\\rnd\\ReleaseBoard\\ReleaseBoard\\ReleaseBoard.csproj",
       "packagesPath": "C:\\Users\\52367624\\.nuget\\packages\\",
-      "outputPath": "C:\\Workspace\\rnd\\BB.ReleaseBoard\\ReleaseBoard\\obj\\",
+      "outputPath": "C:\\Workspace\\rnd\\ReleaseBoard\\ReleaseBoard\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\52367624\\AppData\\Roaming\\NuGet\\NuGet.Config",
